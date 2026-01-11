@@ -1,7 +1,7 @@
 """Documentation about the fairsharer module."""
 
 
-# FIXME: put actual code here
+
 def fair_sharer(values, num_iterations, share=0.1):
     """Runs num_iterations.
 
