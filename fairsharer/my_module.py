@@ -33,8 +33,8 @@ def fair_sharer(values, num_iterations, share=0.1):
     for _ in range(num_iterations):
         values_new = values.copy()
 
-        max_value = max(values)
-        max_index = values.index(max_value)
+        max_index = values.index(max(values))
+        max_value = values[max_index]
 
         amount = share * max_value
 
