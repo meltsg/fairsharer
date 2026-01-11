@@ -45,6 +45,6 @@ def fair_sharer(values, num_iterations, share=0.1):
         values_new[left_index] += amount
         values_new[right_index] += amount
 
-    values = values_new
+        values = values_new
 
     return values
