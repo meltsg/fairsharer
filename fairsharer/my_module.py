@@ -2,28 +2,49 @@
 
 
 # FIXME: put actual code here
-def hello(name):
-    """Say hello.
+def fair_sharer(values, num_iterations, share=0.1):
+    """Runs num_iterations.
 
-    Function docstring using Google docstring style.
+    -In each iteration the largest value in the list gives 
+    a part of its value to its left and right neighbor
+    -The list is circular so the first and last elements are also neighbors 
+    
+
+    Examples:
+        fair_sharer([0, 1000, 800, 0], 1) --> [100, 800, 900, 0]
+        fair_sharer([0, 1000, 800, 0], 2) --> [100, 890, 720, 90]
 
     Args:
-        name (str): Name to say hello to
+        values:
+            list of numeric values
+        num_iterations:
+            number of times the redistribution is repeated
+        share:
+            fraction of the max value given to each neighbor
 
     Returns:
-        str: Hello message
-
-    Raises:
-        ValueError: If `name` is equal to `nobody`
-
-    Example:
-        This function can be called with `Jane Smith` as argument using
-
-        >>> from fairsharer.my_module import hello
-        >>> hello('Jane Smith')
-        'Hello Jane Smith!'
-
+        list of values after redistribution
     """
-    if name == "nobody":
-        raise ValueError("Cannot say hello to nobody")
-    return f"Hello {name}!"
+    values = list(values)
+
+    if len(values) == 0:
+        return values
+
+    for _ in range(num_iterations):
+        values_new = values.copy()
+
+        max_value = max(values)
+        max_index = values.index(max_value)
+
+        amount = share * max_value
+
+        left_index = (max_index - 1) % len(values)
+        right_index = (max_index + 1) % len(values)
+
+        values_new[max_index] -= 2 * amount
+        values_new[left_index] += amount
+        values_new[right_index] += amount
+
+    values = values_new
+
+    return values
